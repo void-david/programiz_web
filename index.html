@@ -3,13 +3,69 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
-        <title>Programiz web</title>
+        <title>Flexbox Practice</title>
 
         <link rel="stylesheet" href="style.css">
-
     </head>
     <body>
-        <h1>hwllo qoels</h1>
-
+        <div>
+            <button>home</button>
+            
+        </div>
+        <div id="square-house">
+            <div class="original">
+                <div class="rotate" id="rotatingDiv"></div>
+            </div>
+    
+            <label for="xSlider">X-Axis:</label>
+            <input type="range" id="xSlider" min="0" max="1" step="1" value="1">
+            <span id="xValue">1</span>
+            <br>
+    
+            <label for="ySlider">Y-Axis:</label>
+            <input type="range" id="ySlider" min="0" max="1" step="1" value="1">
+            <span id="yValue">1</span>
+            <br>
+    
+            <label for="zSlider">Z-Axis:</label>
+            <input type="range" id="zSlider" min="0" max="1" step="1" value="1">
+            <span id="zValue">1</span>
+            <br>
+    
+            <label for="rotationSlider">Rotation Angle:</label>
+            <input type="range" id="rotationSlider" min="0" max="360" value="60">
+            <span id="angleDisplay">60°</span>
+    
+            <script>
+                const xSlider = document.getElementById('xSlider');
+                const ySlider = document.getElementById('ySlider');
+                const zSlider = document.getElementById('zSlider');
+                const rotationSlider = document.getElementById('rotationSlider');
+                const rotatingDiv = document.getElementById('rotatingDiv');
+                const xValue = document.getElementById('xValue');
+                const yValue = document.getElementById('yValue');
+                const zValue = document.getElementById('zValue');
+                const angleDisplay = document.getElementById('angleDisplay');
+    
+                const updateRotation = () => {
+                    const x = xSlider.value;
+                    const y = ySlider.value;
+                    const z = zSlider.value;
+                    const angle = rotationSlider.value;
+    
+                    rotatingDiv.style.transform = `rotate3d(${x}, ${y}, ${z}, ${angle}deg)`;
+                    xValue.textContent = x;
+                    yValue.textContent = y;
+                    zValue.textContent = z;
+                    angleDisplay.textContent = `${angle}°`;
+                };
+    
+                xSlider.addEventListener('input', updateRotation);
+                ySlider.addEventListener('input', updateRotation);
+                zSlider.addEventListener('input', updateRotation);
+                rotationSlider.addEventListener('input', updateRotation);
+            </script>
+        </div>
+        
     </body>
 </html>
