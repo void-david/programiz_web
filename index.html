@@ -9,14 +9,24 @@
     </head>
     <body>
         <div>
-            <button>home</button>
-            
+            <form action="/submit" method="post">
+                <input type="text" name="name" placeholder="Your name">
+                <input type="password" name="password" placeholder="Your password">
+                <input type="submit" value="Submit">
+              </form>
+
+              <select>
+                <option>Select one</option>
+                <option value="option1">Option 1</option>
+                <option value="option2">Option 2</option>
+                <option value="option3">Option 3</option>
+            </select>
         </div>
         <div id="square-house">
             <div class="original">
                 <div class="rotate" id="rotatingDiv"></div>
             </div>
-    
+        
             <label for="xSlider">X-Axis:</label>
             <input type="range" id="xSlider" min="0" max="1" step="1" value="1">
             <span id="xValue">1</span>
@@ -34,7 +44,10 @@
     
             <label for="rotationSlider">Rotation Angle:</label>
             <input type="range" id="rotationSlider" min="0" max="360" value="60">
-            <span id="angleDisplay">60°</span>
+            <span id="angleDisplay">0°</span>
+            <br>
+    
+            <button id="toggleRotation">Stop Rotation</button>
     
             <script>
                 const xSlider = document.getElementById('xSlider');
@@ -46,24 +59,53 @@
                 const yValue = document.getElementById('yValue');
                 const zValue = document.getElementById('zValue');
                 const angleDisplay = document.getElementById('angleDisplay');
-    
+                const toggleRotationButton = document.getElementById('toggleRotation');
+
+                let zRotationAngle = 0;
+                let isSpinning = true; // Tracks whether the square is spinning
+                let animationFrameId;
+
                 const updateRotation = () => {
                     const x = xSlider.value;
                     const y = ySlider.value;
                     const z = zSlider.value;
                     const angle = rotationSlider.value;
-    
+
                     rotatingDiv.style.transform = `rotate3d(${x}, ${y}, ${z}, ${angle}deg)`;
                     xValue.textContent = x;
                     yValue.textContent = y;
                     zValue.textContent = z;
                     angleDisplay.textContent = `${angle}°`;
                 };
-    
+
+                const spinSquare = () => {
+                    if (isSpinning) {
+                        zRotationAngle += 1; // Increment the Z-axis rotation angle
+                        rotatingDiv.style.transform = `rotateZ(${zRotationAngle}deg)`;
+                        animationFrameId = requestAnimationFrame(spinSquare); // Continue the animation
+                    }
+                };
+
+                const toggleRotation = () => {
+                    if (isSpinning) {
+                        isSpinning = false;
+                        cancelAnimationFrame(animationFrameId); // Stop the animation
+                        toggleRotationButton.textContent = 'Start Rotation';
+                    } else {
+                        isSpinning = true;
+                        spinSquare(); // Restart the animation
+                        toggleRotationButton.textContent = 'Stop Rotation';
+                    }
+                };
+
                 xSlider.addEventListener('input', updateRotation);
                 ySlider.addEventListener('input', updateRotation);
                 zSlider.addEventListener('input', updateRotation);
                 rotationSlider.addEventListener('input', updateRotation);
+                toggleRotationButton.addEventListener('click', toggleRotation);
+
+                // Start the spinning animation
+                spinSquare();
             </script>
         </div>
         

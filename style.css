@@ -1,6 +1,48 @@
-/* styles original div */
-#square-house{
-    float:right
+button{
+    background-color: purple;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+button:hover{
+    translate: 0px -5px;
+}
+
+input{
+    display: block;
+
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+    border: 2px solid purple;
+    padding: 5px;
+    margin: 10px;
+}
+
+input[type="submit"] {
+    background-color: purple;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
+    padding: 10px;
+    height: auto;
+    text-align: center;
+}
+
+input[type="submit"]:hover {
+    translate: 0px -5px;
+}
+
+select {
+    background-color: purple;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
 }
 
 div.original {
@@ -15,6 +57,6 @@ div.original {
 div.rotate {
     width: 100px;
     height: 100px;
-    background-color: orange;
-    transform: rotate3d(1, 1, 1, 60deg);
+    background-color: purple;
+    transform: rotate3d(1, 1, 1, 0deg);
 }
